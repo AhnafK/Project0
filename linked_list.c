@@ -27,14 +27,33 @@ struct song_node * insert_front(struct song_node * n, char x[100], char z[100]){
   return ans;
 }
 
+
+struct song_node * insert_any(struct song_node* n, char x[100], char z[100], struct song_node * last){
+  struct song_node * ans = insert_front(n,x,z);
+  if(last){
+    last->next = ans;
+  }
+  return ans;
+}
+
 struct song_node * insert_order(struct song_node* n, char x[100], char z[100]){
+  struct song_node * last;
+  struct song_node * first = n;
   while(n){
     if(strcmp(n->artist,z) <= 0){
-      return insert_front(n,x,z);
+      if(last){
+	return insert_any(n,x,z,last);
+      }
+      else{
+	return first;
+      }
     }
+    last = n;
     n = n->next;
   }
+   return insert_any(NULL,x,z,last);
 }
+
 
 struct song_node * free_list(struct song_node * n){
   struct song_node * f = n;
@@ -48,5 +67,6 @@ struct song_node * free_list(struct song_node * n){
 
 int main(){
   struct song_node * f = insert_front(NULL,"food","down");
+  f = insert_order(f, "gref", "jerrison");
   print_list(f);
 }
