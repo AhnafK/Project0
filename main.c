@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "linked_list.c"
+
+int main(){
+  struct song_node * f = insert_front(NULL,"food","down");
+  f = insert_order(f, "gref", "jerrison");
+  print_list(f);
+  printf("searching for song by jerrison: ");
+  print_node(search_artist(f, "jerrison"));
+  printf("searching for gref by jerrison: ");
+  print_node(search(f, "gref", "jerrison"));
+  //printf("searching for grief by jerrison: ");
+  //print_node(search(f, "grief", "jerrison"));
+  free_list(f);
+  print_list(f);
+  printf("%p ",NULL);
+}

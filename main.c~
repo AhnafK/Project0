@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "linked_list.c"
+
+int main(){
+  struct song_node * f = insert_front(NULL,"food","down");
+  f = insert_order(f, "gref", "jerrison");
+  print_list(f);
+  free_list(f);
+  print_list(f);
+}

@@ -19,6 +19,11 @@ void print_list(struct song_node * n){
   }
 }
 
+void print_node(struct song_node * n){
+    printf("Artist: %s\t", n->artist);
+    printf("Name: %s\n", n->name);
+}
+
 struct song_node * insert_front(struct song_node * n, char x[100], char z[100]){
   struct song_node *ans = malloc(sizeof(struct song_node));
   strcpy(ans->name,x);
@@ -54,10 +59,15 @@ struct song_node * insert_order(struct song_node* n, char x[100], char z[100]){
    return insert_any(NULL,x,z,last);
 }
 
+struct song_node * remove(struct song_node * wole, struct song_node * bye){
+  struct song node * next_so = bye.next;
+  free(bye);
+  insert_order(wole, next_so->name, next_so.artist)
+}
 
 struct song_node * free_list(struct song_node * n){
   struct song_node * f = n;
-  while(f->next){
+  while(f){
     free(f);
     f=f->next;
   }
@@ -65,8 +75,23 @@ struct song_node * free_list(struct song_node * n){
   return n;
 }
 
-int main(){
-  struct song_node * f = insert_front(NULL,"food","down");
-  f = insert_order(f, "gref", "jerrison");
-  print_list(f);
+struct song_node * search_artist(struct song_node * song, char * name){ 
+  while(song){
+    if(!strcmp(song->artist,name)){
+      return song;
+    }
+    song = song->next;
+  }
+  return NULL;
 }
+
+struct song_node * search(struct song_node * song, char * song_name, char * name){ 
+  while(song){
+    if(!(strcmp(song->artist,name) + strcmp(song->name,song_name))){
+      return song;
+    }
+    song = song->next;
+  }
+  return NULL;
+}
+
