@@ -44,6 +44,7 @@ struct song_node * insert_any(struct song_node* n, char x[100], char z[100], str
 struct song_node * insert_order(struct song_node* n, char x[100], char z[100]){
   struct song_node * last = NULL;
   struct song_node * first = n;
+  printf("%s",n->artist);
   while(n){
     if(strcmp(n->artist,z) >= 0){
       if(!last){
