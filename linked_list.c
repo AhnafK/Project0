@@ -45,24 +45,42 @@ struct song_node * insert_order(struct song_node* n, char x[100], char z[100]){
   struct song_node * last = NULL;
   struct song_node * first = n;
   while(n){
-    if(strcmp(n->artist,z) <= 0){
+    if(strcmp(n->artist,z) >= 0){
       if(!last){
+	printf("\n--%s %s--%s %s\n",z,x,n->artist,n->name);
 	return insert_any(n,x,z,last);
       }
       else{
+	printf("\n--%s %s--%s %s--%s %s--\n", last->artist, last->name, z, x, n->artist,n->name);
+	insert_any(n,x,z,last);
 	return first;
       }
     }
     last = n;
     n = n->next;
   }
-   return insert_any(NULL,x,z,last);
+   insert_any(NULL,x,z,last);
+   return first;
 }
 
-struct song_node * remove(struct song_node * wole, struct song_node * bye){
-  struct song node * next_so = bye.next;
-  free(bye);
-  insert_order(wole, next_so->name, next_so.artist)
+struct song_node * remove_song(struct song_node * wole, struct song_node * bye){
+  /* struct song node * next_so = bye.next; */
+  /* free(bye); */
+  /* insert_order(wole, next_so->name, next_so.artist) */
+  struct song_node * neext = wole->next;
+  if(wole == bye){
+    free(wole);
+    return neext;
+  }
+  struct song_node * last = wole;
+  while(neext){
+    if(neext == bye){
+      last->next = neext->next;
+      free(neext);
+      return neext;
+    }
+    last = neext;
+  }
 }
 
 struct song_node * free_list(struct song_node * n){
